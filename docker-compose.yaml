@@ -1,0 +1,8 @@
+version: '3'
+services:
+  app:
+    container_name: blockchain_app
+    build:
+      context: ./docker/php
+    volumes:
+      - ./:/var/www/blockchain
