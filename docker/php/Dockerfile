@@ -10,5 +10,3 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && mv composer /usr/local/bin/composer
 
 WORKDIR /var/www/blockchain
-
-RUN composer install
