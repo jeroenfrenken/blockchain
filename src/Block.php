@@ -20,7 +20,7 @@ class Block
     {
         $messageWithPreviousHash = $this->message . $this->previousHash;
         $this->nonce = ProofOfWork::findNonce($messageWithPreviousHash);
-        $this->hash = ProofOfWork::hash($this->message . $this->previousHash . $this->nonce);
+        $this->hash = ProofOfWork::hash($messageWithPreviousHash . $this->nonce);
     }
 
     public function isValid(): bool

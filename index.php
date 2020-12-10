@@ -9,12 +9,6 @@ $blockChain->addBlock('Test1234');
 $blockChain->addBlock('Test1234');
 $blockChain->addBlock('Test1234');
 $blockChain->addBlock('Test1234');
-$blockChain->addBlock('Test1234');
-$blockChain->addBlock('Test1234');
-$blockChain->addBlock('Test1234');
-$blockChain->addBlock('Test1234');
-$blockChain->addBlock('Test1234');
-$blockChain->addBlock('Test1234');
 //$blockChain->addFakeBlock('test1234');
 
 foreach ($blockChain->blocks as $block) {

@@ -3,7 +3,7 @@ namespace JeroenFrenken\BlockChain;
 
 class ProofOfWork
 {
-    public static string $target = '0000';
+    public static string $target = '000';
 
     public static function hash(string $message): string
     {
@@ -22,6 +22,6 @@ class ProofOfWork
 
     public static function isValidNonce(string $message, int $nonce): bool
     {
-        return 0 === strpos(self::hash($message . $nonce), self::$target);
+        return strpos(self::hash($message . $nonce), self::$target) === 0;
     }
 }
