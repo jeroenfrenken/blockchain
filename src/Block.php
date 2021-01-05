@@ -5,31 +5,37 @@ namespace JeroenFrenken\BlockChain;
 class Block
 {
     public ?string $previousHash;
-    public string $hash;
-    public string $message;
     public int $nonce;
+    public string $hash;
 
-    public function __construct(string $message, ?Block $previousBlock)
+    public function __construct(
+        public Transaction $transaction,
+        ?Block $previousBlock
+    )
     {
-        $this->message = $message;
         $this->previousHash = $previousBlock->hash ?? null;
         $this->mine();
     }
 
+    public static function createGenesis(string $publicKey, string $privateKey, int $amount): Block
+    {
+        return new self(new Transaction(null, $publicKey, $amount, $privateKey), null);
+    }
+
     public function mine()
     {
-        $messageWithPreviousHash = $this->message . $this->previousHash;
+        $messageWithPreviousHash = $this->transaction->message() . $this->previousHash;
         $this->nonce = ProofOfWork::findNonce($messageWithPreviousHash);
         $this->hash = ProofOfWork::hash($messageWithPreviousHash . $this->nonce);
     }
 
     public function isValid(): bool
     {
-        return ProofOfWork::isValidNonce($this->message . $this->previousHash, $this->nonce);
+        return ProofOfWork::isValidNonce($this->transaction->message() . $this->previousHash, $this->nonce) && $this->transaction->isValid();
     }
 
     public function __toString()
     {
-        return "HASH:{$this->hash} \r\n PREVIOUS_HASH:{$this->previousHash} \r\n MESSAGE:{$this->message} \r\n NONCE:{$this->nonce} \r\n";
+        return "HASH:{$this->hash} \r\n PREVIOUS_HASH:{$this->previousHash} \r\n MESSAGE: \r\n{$this->transaction} \r\n NONCE:{$this->nonce} \r\n";
     }
 }

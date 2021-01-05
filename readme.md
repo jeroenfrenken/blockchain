@@ -8,5 +8,5 @@ docker-compose build
 docker run -v $(pwd):/var/www/blockchain blockchain_app:latest composer install
 ```
 ```bash
-docker run -v $(pwd):/var/www/blockchain blockchain_app:latest php index.php
+`docker run -v $(pwd):/var/www/blockchain blockchain_app:latest php index.php`
 ```

@@ -1,4 +1,5 @@
 <?php
+
 namespace JeroenFrenken\BlockChain;
 
 class ProofOfWork
@@ -22,6 +23,6 @@ class ProofOfWork
 
     public static function isValidNonce(string $message, int $nonce): bool
     {
-        return strpos(self::hash($message . $nonce), self::$target) === 0;
+        return str_starts_with(self::hash($message . $nonce), self::$target);
     }
 }
