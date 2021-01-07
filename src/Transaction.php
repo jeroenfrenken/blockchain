@@ -20,7 +20,8 @@ class Transaction
 
     public function message(): string
     {
-        return ProofOfWork::hash($this->from ?? ''.$this->to.$this->amount);
+        $from = $this->from ?? '';
+        return ProofOfWork::hash(trim($from).trim($this->to).trim($this->amount));
     }
 
     public function isValid(): bool
